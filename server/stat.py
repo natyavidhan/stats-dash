@@ -34,28 +34,16 @@ def convert_ms_to_string(ms):
         ret += f"{seconds}s "
     return ret
 
-@app.route('/')
+@app.route('/meta')
 def index():
     data = {
         "machine": MACHINE,
         "system": SYSTEM
     }
-    return render_template('index.html', data=data)
+    return jsonify(data)
 
 @app.route('/data')
 def data():
-    """
-    cpu usgae
-    vmem
-    smem
-    disk usage
-    disk io
-    net io
-    ip
-    temp
-    fan_speed
-    boot_time
-    """
     cpu_usage = psutil.cpu_percent(interval=1, percpu=True)
     vmem = psutil.virtual_memory()
     smem = psutil.swap_memory()
